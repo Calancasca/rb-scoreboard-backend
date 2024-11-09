@@ -1,5 +1,34 @@
 import { db } from './database'
-import { PersonUpdate, Person, NewPerson } from './types'
+import {   
+  Event, NewEvent,EventUpdate,
+  Player, NewPlayer,PlayerUpdate,
+  Team, NewTeam, TeamUpdate,
+  Fixture, NewFixture,FixtureUpdate,
+  FixtureTeam, NewFixtureTeam,FixtureTeamUpdate,
+  Tournament, NewTournament,TournamentUpdate,
+  TeamTournament, NewTeamTournament,TeamTournamentUpdate,
+  EventType, NewEventType, EventTypeUpdate,
+  Draft, NewDraft, DraftUpdate  
+} from './types'
+
+
+export async function findEventById(id: number){
+    return await db
+    .selectFrom('Event')
+    .where('event_id', "=", id)
+    .selectAll()
+    .executeTakeFirst()
+}
+
+export async function findPlayerById(id: number){
+  return await db
+  .selectFrom('Player')
+  .where('event_id', "=", id)
+  .selectAll()
+  .executeTakeFirst()
+}
+
+
 
 export async function findPersonById(id: number) {
   return await db
@@ -8,6 +37,8 @@ export async function findPersonById(id: number) {
     .selectAll()
     .executeTakeFirst()
 }
+
+
 
 export async function findPeople(criteria: Partial<Person>) {
   let query = db.selectFrom('person')
